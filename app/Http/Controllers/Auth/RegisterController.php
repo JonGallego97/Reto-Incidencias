@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Department;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -40,6 +41,11 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    public function showRegistrationForm()
+    {
+        $departments = Department::pluck('name', 'id');
+        return view('auth.register', compact('departments'));
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -63,11 +69,13 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+{
+    return User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'department_id' => $data['department_id'],
+    ]);
+}
+
 }

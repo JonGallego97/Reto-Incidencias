@@ -10,7 +10,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('departments.show', $department) }}" class="text-primary">{{ $department->name }}</a>
                     <span class="text-muted">Escrito el: {{ $department->created_at }}</span>
-                    <div>
+                    <div class="btn-group">
                         <a href="{{ route('departments.edit', $department) }}" class="btn btn-secondary">Editar</a>
 
                         <!-- Utiliza un formulario para eliminar el departamento -->
