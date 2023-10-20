@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DepartmentsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,9 @@ Auth::Routes();
 
 Route::resources([
     'departments' => DepartmentsController::class,
+]);
+Route::resources([
+    'categories' => CategoriesController::class,
 ]);
 
 
