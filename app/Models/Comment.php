@@ -12,7 +12,7 @@ class Comment extends Model
     protected $fillable = [
         'text',
         'time_used',
-        'incidence_id', 
+        'incidence_id',
         'user_id',
     ];
 
@@ -32,4 +32,3 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 }
-
