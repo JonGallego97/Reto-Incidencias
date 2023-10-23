@@ -12,7 +12,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('created_at')->get();
+        return view('categories.index',['categories' => $categories]);
     }
 
     /**
@@ -20,7 +21,8 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
+
     }
 
     /**
@@ -28,15 +30,19 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categories = new Category();
+        $categories ->name = $request ->name;
+        $categories->save();
+        return redirect()->route('categories.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $categories)
+    public function show(Category $category)
     {
-        //
+        return view('categories.show', ['category' => $category]);
+
     }
 
     /**
@@ -44,7 +50,8 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', ['category' => $category]);
+
     }
 
     /**
@@ -52,7 +59,9 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->name = $request->name;
+        $category ->save();
+        return view('categories.show', ['category' => $category]);
     }
 
     /**
@@ -60,6 +69,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }
