@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\IncidenceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,12 @@ Route::resources([
 ]);
 Route::resources([
     'categories' => CategoriesController::class,
+]);
+Route::resources([
+    'incidences' => IncidenceController::class,
+]);
+Route::resources([
+    'comments' => CommentsController::class,
 ]);
 
 

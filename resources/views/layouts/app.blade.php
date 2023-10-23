@@ -37,7 +37,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('categories.index') }}">Categorias</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('incidences.index') }}">Incidencias</a>
                         </li>
 
 
