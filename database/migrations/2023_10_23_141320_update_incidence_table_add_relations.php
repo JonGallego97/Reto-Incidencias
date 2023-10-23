@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateIncidencesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -30,4 +30,4 @@ class UpdateIncidencesTable extends Migration
             $table->dropColumn(['title', 'text', 'estimated_minutes', 'category_id', 'owner_id', 'department_id']);
         });
     }
-}
+};
