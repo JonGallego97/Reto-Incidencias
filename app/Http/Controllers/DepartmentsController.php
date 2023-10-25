@@ -23,7 +23,7 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        return view('departments.create');
+        return view('departments.form');
 
     }
 
@@ -36,7 +36,6 @@ class DepartmentsController extends Controller
         $department ->name = $request ->name;
         $department->save();
         return redirect()->route('departments.index');
-        //
     }
 
     /**
@@ -52,7 +51,7 @@ class DepartmentsController extends Controller
      */
     public function edit(Department $department)
     {
-        return view('departments.edit', ['department' => $department]);
+        return view('departments.form', ['department' => $department]);
 
     }
 

@@ -21,7 +21,7 @@ class IncidenceController extends Controller
      */
     public function create()
     {
-        return view('incidences.create');
+        return view('incidences.form');
     }
 
     /**
@@ -57,7 +57,7 @@ class IncidenceController extends Controller
      */
     public function edit(Incidence $incidence)
     {
-        return view('incidences.edit', ['incidence' => $incidence]);
+        return view('incidences.form', ['incidence' => $incidence]);
     }
 
     /**

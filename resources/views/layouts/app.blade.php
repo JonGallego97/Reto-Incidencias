@@ -42,8 +42,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('incidences.index') }}">Incidencias</a>
                         </li>
-
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->

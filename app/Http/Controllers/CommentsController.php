@@ -12,7 +12,8 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::orderBy('created_at')->get();
+        return view('comments.index',['comments' => $comments]);
     }
 
     /**
@@ -20,7 +21,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('comments.form');
     }
 
     /**
@@ -28,15 +29,24 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment();
+        $comment->text = $request->text;
+        $comment->time_used = $request->time_used;
+        $comment->incidence_id = $request->incidence_id;
+        $comment->user_id = $request->user_id;
+        $comment->save();
+
+        return redirect()->route('comments.index');
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(Comment $comment)
     {
-        //
+        return view('comments.show', ['comment' => $comment]);
+
     }
 
     /**
@@ -44,7 +54,8 @@ class CommentsController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comments.form', ['comment' => $comment]);
+
     }
 
     /**
@@ -52,14 +63,22 @@ class CommentsController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->text = $request->text;
+        $comment->time_used = $request->time_used;
+        $comment->incidence_id = $request->incidence_id;
+        $comment->user_id = $request->user_id;
+        $comment->save();
+
+        return view('comments.show', ['comment' => $comment]);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->route('comments.index');
     }
 }

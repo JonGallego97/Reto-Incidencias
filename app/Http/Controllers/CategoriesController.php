@@ -21,7 +21,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('categories.form');
 
     }
 
@@ -50,7 +50,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', ['category' => $category]);
+        return view('categories.form', ['category' => $category]);
 
     }
 
