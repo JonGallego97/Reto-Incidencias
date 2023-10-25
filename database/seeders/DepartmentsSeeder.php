@@ -24,5 +24,11 @@ class DepartmentsSeeder extends Seeder
             "updated_at" => now(),
 
         ]);
+        DB::table('departments')->insert([
+            "name" => "Departamento3",
+            "created_at" => now(),
+            "updated_at" => now(),
+
+        ]);
     }
 }

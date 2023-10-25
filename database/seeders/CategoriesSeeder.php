@@ -23,5 +23,10 @@ class CategoriesSeeder extends Seeder
             "created_at" => now(),
             "updated_at" => now(),
         ]);
+        DB::table('categories')->insert([
+            "name" => "Categoria 3",
+            "created_at" => now(),
+            "updated_at" => now(),
+        ]);
     }
 }
