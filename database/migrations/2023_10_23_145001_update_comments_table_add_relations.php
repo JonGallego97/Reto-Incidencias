@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('comments', function (Blueprint $table) {
             $table->text('text');
             $table->integer('time_used');
-            $table->foreignId('incidence_id')->constrained('incidences');
+            $table->foreignId('incidence_id')->constrained('incidences')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users');
         });
     }

@@ -14,6 +14,9 @@
         <div class="form-group mb-3">
             <label for="name" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ isset($department) ? $department->name : '' }}" required/>
+            @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary">{{ isset($department) ? 'Guardar Cambios' : 'Crear' }}</button>
     </form>

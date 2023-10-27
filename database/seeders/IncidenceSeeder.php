@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 
 class IncidenceSeeder extends Seeder
@@ -12,7 +13,6 @@ class IncidenceSeeder extends Seeder
      */
     public function run()
     {
-        // Crear incidencias de ejemplo
         DB::table('incidences')->insert([
             'title' => 'Incidencia 1',
             'text' => 'Descripción de la Incidencia 1',

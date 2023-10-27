@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Incidence;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        $incidences = Incidence::orderBy('created_at')->get();
+        $incidences = Incidence::orderBy('created_at','desc')->get();
         return view('incidences.index',['incidences' => $incidences]);
     }
 
@@ -21,8 +22,8 @@ class IncidenceController extends Controller
      */
     public function create()
     {
-        return view('incidences.form');
-    }
+        $categories = Category::all();
+        return view('incidences.form', ['categories' => $categories]);    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +35,7 @@ class IncidenceController extends Controller
         $incidence->text = $request->text;
         $incidence->estimated_minutes = $request->estimated_minutes;
         $incidence->category_id = $request->category_id;
-        $incidence->department_id = $request->department_id;
+        $incidence->department_id = auth()->user()->department_id;
         $incidence->owner_id = auth()->user()->id;
 
 
@@ -55,10 +56,21 @@ class IncidenceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Incidence $incidence)
-    {
-        return view('incidences.form', ['incidence' => $incidence]);
-    }
+
+     public function edit(Incidence $incidence)
+     {
+         // Verifica si el usuario autenticado no es el propietario de la incidencia
+         if (auth()->user()->id !== $incidence->owner_id) {
+             return redirect()->route('incidences.index')
+                 ->with('error', 'No tienes permisos para editar esta incidencia.');
+         }
+
+         $categories = Category::all();
+
+         return view('incidences.form', ['incidence' => $incidence, 'categories' => $categories]);
+     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -83,6 +95,9 @@ class IncidenceController extends Controller
      */
     public function destroy(Incidence $incidence)
     {
-        //
+        $incidence->delete();
+        return redirect()->route('incidences.index');
+
+
     }
 }

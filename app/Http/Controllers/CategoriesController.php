@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Incidence;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class CategoriesController extends Controller
 {
@@ -12,9 +15,24 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('created_at')->get();
-        return view('categories.index',['categories' => $categories]);
+        $categories = Category::all();
+        $categoriesWithIncidences = [];
+
+        foreach ($categories as $category) {
+            $incidences = Incidence::where('category_id', $category->id)
+                ->orderBy('created_at', 'desc')
+                ->take(5)
+                ->get();
+
+            $categoriesWithIncidences[] = [
+                'category' => $category,
+                'incidences' => $incidences,
+            ];
+        }
+
+        return view('categories.index', ['categoriesWithIncidences' => $categoriesWithIncidences]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,6 +48,12 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('categories', 'name'),
+            ],
+        ]);
         $categories = new Category();
         $categories ->name = $request ->name;
         $categories->save();
@@ -59,6 +83,12 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('categories', 'name'),
+            ],
+        ]);
         $category->name = $request->name;
         $category ->save();
         return view('categories.show', ['category' => $category]);
@@ -68,8 +98,19 @@ class CategoriesController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Category $category)
-    {
-        $category->delete();
-        return redirect()->route('categories.index');
+{
+    // Obtén todas las incidencias que tienen esta categoría
+    $incidences = Incidence::where('category_id', $category->id)->get();
+
+    // Desasocia las incidencias eliminando su referencia a la categoría
+    foreach ($incidences as $incidence) {
+        $incidence->category_id = null;
+        $incidence->save();
     }
+
+    // Luego, elimina la categoría
+    $category->delete();
+
+    return redirect()->route('categories.index');
+}
 }

@@ -20,7 +20,7 @@
                     <td>{{ $comment->id }}</td>
                     <td>{{ $comment->text }}</td>
                     <td>{{ $comment->time_used }}</td>
-                    <td>{{ $comment->incidence->name }}</td>
+                    <td>{{ $comment->incidence->title }}</td>
                     <td>{{ $comment->user->name }}</td>
                 </tr>
             @endforeach
