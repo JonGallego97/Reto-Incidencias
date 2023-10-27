@@ -15,9 +15,11 @@ return new class extends Migration
             $table->string('title');
             $table->text('text');
             $table->integer('estimated_minutes');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->foreignId('owner_id')->constrained('users');
-            $table->foreignId('department_id')->constrained('departments');
+            $table->foreignId('department_id')
+                ->constrained('departments')
+                ->onDelete('restrict');
         });
     }
 

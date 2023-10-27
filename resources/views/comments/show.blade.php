@@ -1,17 +1,17 @@
-@extends('layouts.app') <!-- Asegúrate de que la ruta de tu archivo de diseño sea correcta -->
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h1>Detalles del Comentario</h1>
 
-    <ul>
-        <li><strong>ID:</strong> {{ $comment->id }}</li>
-        <li><strong>Texto:</strong> {{ $comment->text }}</li>
-        <li><strong>Tiempo Usado:</strong> {{ $comment->time_used }}</li>
-        <li><strong>Incidente:</strong> {{ $comment->incidence->name }}</li>
-        <li><strong>Usuario:</strong> {{ $comment->user->name }}</li>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>ID:</strong> {{ $comment->id }}</li>
+        <li class="list-group-item"><strong>Texto:</strong> {{ $comment->text }}</li>
+        <li class="list-group-item"><strong>Tiempo Usado:</strong> {{ $comment->time_used }}</li>
+        <li class="list-group-item"><strong>Incidente:</strong> {{ $comment->incidence->title }}</li>
+        <li class="list-group-item"><strong>Usuario:</strong> {{ $comment->user->name }}</li>
     </ul>
 
-    <a href="{{ route('comments.index') }}" class="btn btn-primary">Volver a la Lista de Comentarios</a>
+    <a href="{{ route('comments.index') }}" class="btn btn-primary mt-3">Volver a la Lista de Comentarios</a>
 </div>
 @endsection

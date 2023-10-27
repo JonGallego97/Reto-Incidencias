@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Incidence;
+
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -13,15 +15,20 @@ class CommentsController extends Controller
     public function index()
     {
         $comments = Comment::orderBy('created_at')->get();
-        return view('comments.index',['comments' => $comments]);
+        return view('comments.index', ['comments' => $comments]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('comments.form');
+        $incidenceId = $request->input('incidence_id');
+        $incidence = Incidence::find($incidenceId);
+
+        if (auth()->user()->department_id == $incidence->department_id) {
+            return view('comments.form', ['incidence' => $incidence]);
+        }
     }
 
     /**
@@ -33,12 +40,11 @@ class CommentsController extends Controller
         $comment->text = $request->text;
         $comment->time_used = $request->time_used;
         $comment->incidence_id = $request->incidence_id;
-        $comment->user_id = $request->user_id;
+        $comment->user_id = auth()->user()->id;
         $comment->save();
 
-        return redirect()->route('comments.index');
+        return redirect()->route('incidences.show', ['incidence' => $comment->incidence_id]);
     }
-
 
     /**
      * Display the specified resource.
@@ -46,7 +52,6 @@ class CommentsController extends Controller
     public function show(Comment $comment)
     {
         return view('comments.show', ['comment' => $comment]);
-
     }
 
     /**
@@ -54,9 +59,15 @@ class CommentsController extends Controller
      */
     public function edit(Comment $comment)
     {
-        return view('comments.form', ['comment' => $comment]);
-
+        if (auth()->user()->id === $comment->user_id) {
+            return view('comments.form', ['comment' => $comment]);
+        } else {
+            return redirect()->route('incidences.index')
+                ->with('error', 'No tienes permisos para editar este comentario.');
+        }
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -66,19 +77,25 @@ class CommentsController extends Controller
         $comment->text = $request->text;
         $comment->time_used = $request->time_used;
         $comment->incidence_id = $request->incidence_id;
-        $comment->user_id = $request->user_id;
+        $comment->user_id = auth()->user()->id;
         $comment->save();
 
         return view('comments.show', ['comment' => $comment]);
     }
-
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Comment $comment)
     {
+        if (auth()->user()->id !== $comment->incidence->owner_id) {
+            return redirect()->route('incidences.show', ['incidence' => $comment->incidence])
+                ->with('error', 'No tienes permisos para eliminar este comentario.');
+        }
+
         $comment->delete();
-        return redirect()->route('comments.index');
+
+        return redirect()->route('incidences.show', ['incidence' => $comment->incidence]);
     }
+
 }

@@ -23,6 +23,14 @@
             <label for="estimated_minutes" class="form-label">Minutos Estimados</label>
             <input type="text" class="form-control" id="estimated_minutes" name="estimated_minutes" value="{{ isset($incidence) ? $incidence->estimated_minutes : '' }}" required/>
         </div>
+        <div class="form-group mb-3">
+            <label for="category_id" class="form-label">Categoría</label>
+            <select class="form-control" id="category_id" name="category_id" required>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if(isset($incidence) && $incidence->category_id == $category->id) selected @endif>{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">{{ isset($incidence) ? 'Guardar Cambios' : 'Crear' }}</button>
     </form>
 </div>
