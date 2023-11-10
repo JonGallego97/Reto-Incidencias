@@ -14,19 +14,19 @@ class DepartmentsSeeder extends Seeder
     public function run(): void
     {
         DB::table('departments')->insert([
-            "name" => "Departamento1",
+            "name" => "Marketing",
             "created_at" => now(),
             "updated_at" => now(),
         ]);
 
         DB::table('departments')->insert([
-            "name" => "Departamento2",
+            "name" => "Recursos Humanos",
             "created_at" => now(),
             "updated_at" => now(),
 
         ]);
         DB::table('departments')->insert([
-            "name" => "Departamento3",
+            "name" => "Desarrollo",
             "created_at" => now(),
             "updated_at" => now(),
 

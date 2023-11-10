@@ -17,7 +17,7 @@
         </div>
         <div class="form-group mb-3">
             <label for="time_used" class="form-label">Tiempo Usado</label>
-            <input type="text" class="form-control" id="time_used" name="time_used" value="{{ isset($comment) ? $comment->time_used : '' }}" required/>
+            <input type="number" class="form-control" id="time_used" name="time_used" value="{{ isset($comment) ? $comment->time_used : '' }}" required/>
         </div>
 
         <input type="hidden" name="incidence_id" value="{{ $comment->incidence_id ?? $incidence->id ?? '' }}">

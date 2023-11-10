@@ -14,7 +14,7 @@ class CommentsSeeder extends Seeder
     public function run(): void
     {
         DB::table('comments')->insert([
-            'text' => 'Comentario 1 para Incidencia 1',
+            'text' => 'Hemos recibido la queja del cliente',
             'time_used' => 15,
             'incidence_id' => 1,
             'user_id' => 1,
@@ -23,7 +23,7 @@ class CommentsSeeder extends Seeder
         ]);
 
         DB::table('comments')->insert([
-            'text' => 'Comentario 2 para Incidencia 1 ',
+            'text' => 'Se esta procesando',
             'time_used' => 20,
             'incidence_id' => 1,
             'user_id' => 1,
@@ -32,10 +32,26 @@ class CommentsSeeder extends Seeder
         ]);
 
         DB::table('comments')->insert([
-            'text' => 'Comentario 3 para Incidencia 1',
+            'text' => 'Solucionado',
             'time_used' => 10,
             'incidence_id' => 1,
-            'user_id' => 1,
+            'user_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('comments')->insert([
+            'text' => 'El cliente lleva esperando 2 horas',
+            'time_used' => 10,
+            'incidence_id' => 4,
+            'user_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('comments')->insert([
+            'text' => 'ya lo he solucionado',
+            'time_used' => 50,
+            'incidence_id' => 4,
+            'user_id' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

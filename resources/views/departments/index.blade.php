@@ -4,44 +4,53 @@
 <div class="container">
     <h1 class="mb-4">Departamentos</h1>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Departamento</th>
-                <th>Últimas 5 Incidencias</th>
-                @auth
-                <th>Acciones</th>
-                @endauth
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($departmentsWithIncidences as $departmentWithIncidences)
-            <tr>
-                <td><a href="{{ route('departments.show', $departmentWithIncidences['department']) }}" class="text-primary">{{ $departmentWithIncidences['department']->name }}</a></td>
-                <td>
-                    <ul>
-                        @foreach ($departmentWithIncidences['incidences'] as $incidence)
-                        <li><a href="{{ route('incidences.show', $incidence) }}">{{ $incidence->title }}</a></li>
-                        @endforeach
-                    </ul>
-                </td>
-                @auth
-                <td>
-                    <div class="btn-group">
-                        <a href="{{ route('departments.edit', $departmentWithIncidences['department']) }}" class="btn btn-secondary">Editar</a>
+    @foreach ($departmentsWithIncidences as $departmentWithIncidences)
+        <div class="mb-4">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Departamento</th>
+                        <th>Últimas 5 Incidencias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <a href="{{ route('departments.show', $departmentWithIncidences['department']) }}" class="text-primary">{{ $departmentWithIncidences['department']->name }}</a>
+                                @auth
+                                <div class="btn-group" style="display: inline;">
+                                    <a href="{{ route('departments.edit', $departmentWithIncidences['department']) }}" class="btn btn-secondary" style="display: inline;">Editar</a>
 
-                        <form action="{{ route('departments.destroy', $departmentWithIncidences['department']) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?')">Eliminar</button>
-                        </form>
-                    </div>
-                </td>
-                @endauth
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                                    <form action="{{ route('departments.destroy', $departmentWithIncidences['department']) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?')">Eliminar</button>
+                                    </form>
+                                </div>
+                                @endauth
+                            </div>
+                        </td>
+                        <td>
+                            @include('incidence-info', ['incidences' => $departmentWithIncidences['incidences']])
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    @endforeach
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     @auth
     <div class="text-center mt-4">

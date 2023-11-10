@@ -21,7 +21,7 @@
         </div>
         <div class="form-group mb-3">
             <label for="estimated_minutes" class="form-label">Minutos Estimados</label>
-            <input type="text" class="form-control" id="estimated_minutes" name="estimated_minutes" value="{{ isset($incidence) ? $incidence->estimated_minutes : '' }}" required/>
+            <input type="number" class="form-control" id="estimated_minutes" name="estimated_minutes" value="{{ isset($incidence) ? $incidence->estimated_minutes : '' }}" required/>
         </div>
         <div class="form-group mb-3">
             <label for="category_id" class="form-label">Categoría</label>

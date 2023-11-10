@@ -42,8 +42,8 @@ class CommentsController extends Controller
         $comment->incidence_id = $request->incidence_id;
         $comment->user_id = auth()->user()->id;
         $comment->save();
-
-        return redirect()->route('incidences.show', ['incidence' => $comment->incidence_id]);
+        $incidenceId = $request->input('incidence_id');
+        return redirect()->route('incidences.show', ['incidence' => $incidenceId]);
     }
 
     /**
@@ -80,7 +80,8 @@ class CommentsController extends Controller
         $comment->user_id = auth()->user()->id;
         $comment->save();
 
-        return view('comments.show', ['comment' => $comment]);
+        $incidenceId = $request->input('incidence_id');
+        return redirect()->route('incidences.show', ['incidence' => $incidenceId]);
     }
 
     /**
