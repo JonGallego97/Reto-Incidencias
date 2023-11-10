@@ -35,7 +35,7 @@
                                 @auth
                                 <td>
                                     @if (auth()->user()->id === $incidence->owner->id)
-                                    <div class="btn-group">
+                                    <div class="btn-group" style="display: inline;">
                                         <a href="{{ route('incidences.edit', $incidence) }}" class="btn btn-primary btn-sm">Editar</a>
                                         <form action="{{ route('incidences.destroy', $incidence) }}" method="POST" style="display: inline;">
                                             @csrf

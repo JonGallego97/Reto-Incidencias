@@ -13,18 +13,18 @@ class CategoriesSeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
-            "name" => "Categoria 1",
+            "name" => "Soporte Clientes",
             "created_at" => now(),
             "updated_at" => now(),
         ]);
 
         DB::table('categories')->insert([
-            "name" => "Categoria 2",
+            "name" => "Vacaciones",
             "created_at" => now(),
             "updated_at" => now(),
         ]);
         DB::table('categories')->insert([
-            "name" => "Categoria 3",
+            "name" => "Soporte Interno",
             "created_at" => now(),
             "updated_at" => now(),
         ]);

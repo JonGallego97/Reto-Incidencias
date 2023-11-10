@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Incidence;
 
 class HomeController extends Controller
 {
@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userIncidences = Incidence::where('owner_id', auth()->id())
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return view('incidences.index', ['incidences' => $userIncidences]);
     }
+
 }
