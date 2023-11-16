@@ -21,6 +21,14 @@ class CommentsSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('comments')->insert([
+            'text' => 'Estamos en Ello',
+            'time_used' => 15,
+            'incidence_id' => 1,
+            'user_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         DB::table('comments')->insert([
             'text' => 'Se esta procesando',
@@ -34,7 +42,7 @@ class CommentsSeeder extends Seeder
         DB::table('comments')->insert([
             'text' => 'Solucionado',
             'time_used' => 10,
-            'incidence_id' => 1,
+            'incidence_id' => 3,
             'user_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
