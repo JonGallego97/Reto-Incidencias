@@ -1,6 +1,5 @@
-
 <table class="table table-bordered">
-    <thead>
+    <thead class="table-secondary">
         <tr>
             <th>Titulo</th>
             <th>Categoría</th>
