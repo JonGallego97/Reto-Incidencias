@@ -6,7 +6,7 @@
 
     @foreach ($categoriesWithIncidences as $categoryWithIncidences)
         <div class="mb-4">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-primary">
                 <thead>
                     <tr>
                         <th>Categoría</th>

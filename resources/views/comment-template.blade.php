@@ -5,7 +5,7 @@
     @if (count($incidence->comments) > 0)
         <ul class="list-group">
             @forelse ($incidence->comments as $comment)
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
                     <div>
                         <strong>Comentario:</strong> {{ $comment->text }}
                         <br>
