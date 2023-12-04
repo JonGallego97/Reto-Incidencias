@@ -19,7 +19,7 @@
                             <div>
                                 <a href="{{ route('departments.show', $departmentWithIncidences['department']) }}" class="text-primary">{{ $departmentWithIncidences['department']->name }}</a>
                                 @auth
-                                <div class="btn-group" style="display: inline;">
+                                <div class="btn-" style="display: inline;">
                                     <a href="{{ route('departments.edit', $departmentWithIncidences['department']) }}" class="btn btn-secondary" style="display: inline;">Editar</a>
 
                                     <form action="{{ route('departments.destroy', $departmentWithIncidences['department']) }}" method="POST" style="display: inline;">
